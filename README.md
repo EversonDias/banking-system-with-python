@@ -13,15 +13,15 @@ Esse Repositório contem todos os desafio feito no curso ciência de dados com p
 <details>
 <summary><strong>Sistema Bancário</strong></summary>
 
-# [Sistema Bancário](#) 
+# [Sistema Bancário](https://github.com/EversonDias/potencia-tech-powered-by-iFood-ciencias-de-dados-com-python/tree/desafio-1-sistema-bancario) 
 
 
 ```bash
-  cd clone 
+  git clone -b desafio-1-sistema-bancario https://github.com/EversonDias/potencia-tech-powered-by-iFood-ciencias-de-dados-com-python.git desafio-1
 ```
 
 ```bash
-  cd potencia-tech-powered-by-iFood-ciencias-de-dados-com-python
+  cd desafio-1
 ```
 
 ```bash
@@ -31,3 +31,17 @@ Esse Repositório contem todos os desafio feito no curso ciência de dados com p
 obs: É necessário ter instalado python3
 
 </details>
+
+# Clone o repositorio
+
+```bash
+  git clone https://github.com/EversonDias/potencia-tech-powered-by-iFood-ciencias-de-dados-com-python.git ciencias-de-dados
+```
+
+```bash
+  cd ciencias-de-dados
+```
+
+```bash
+  git chekout <nome da branch do desafil>
+```
