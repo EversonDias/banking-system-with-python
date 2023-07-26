@@ -30,6 +30,28 @@ obs: É necessário ter instalado python3
 
 </details>
 
+<details>
+<summary><strong>Desafio 2</strong></summary>
+
+# [Sistema Bancário](https://github.com/EversonDias/potencia-tech-powered-by-iFood-ciencias-de-dados-com-python/tree/desafio-2) 
+
+
+```bash
+  git clone -b desafio-2 https://github.com/EversonDias/potencia-tech-powered-by-iFood-ciencias-de-dados-com-python.git desafio-2
+```
+
+```bash
+  cd desafio-2
+```
+
+```bash
+  python3 main.py
+```
+
+obs: É necessário ter instalado python3
+
+</details>
+
 # Clone o repositorio
 
 ```bash
