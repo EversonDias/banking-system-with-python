@@ -33,7 +33,7 @@ obs: É necessário ter instalado python3
 <details>
 <summary><strong>Desafio 2</strong></summary>
 
-# [Sistema Bancário](https://github.com/EversonDias/potencia-tech-powered-by-iFood-ciencias-de-dados-com-python/tree/desafio-2) 
+# [Sistema Bancário com Funções](https://github.com/EversonDias/potencia-tech-powered-by-iFood-ciencias-de-dados-com-python/tree/desafio-2) 
 
 
 ```bash
