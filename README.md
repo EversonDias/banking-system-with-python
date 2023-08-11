@@ -6,62 +6,28 @@
 
 Esse Repositório contem todos os desafio feito no curso ciência de dados com python  feito na plataforma [Dio](https://web.dio.me/home) em parceria com Ifood
 
-# Desafios
-
-<details>
-<summary><strong>Sistema Bancário</strong></summary>
-
-# [Sistema Bancário](https://github.com/EversonDias/potencia-tech-powered-by-iFood-ciencias-de-dados-com-python/tree/desafio-1-sistema-bancario) 
-
+# Clone o repositório
 
 ```bash
-  git clone -b desafio-1-sistema-bancario https://github.com/EversonDias/potencia-tech-powered-by-iFood-ciencias-de-dados-com-python.git desafio-1
+  git clone -b desafio_ecommerce https://github.com/EversonDias/potencia-tech-powered-by-iFood-ciencias-de-dados-com-python.git desafio_ecommerce
 ```
 
 ```bash
-  cd desafio-1
+  cd desafio_ecommerce
 ```
 
-```bash
-  python3 main.py
-```
+## SGBD
 
-obs: É necessário ter instalado python3
+MySQL
 
-</details>
+## schema.sql
 
-<details>
-<summary><strong>Desafio 2</strong></summary>
+Contei o código de criação do banco de dados e das tabelas.
 
-# [Sistema Bancário com Funções](https://github.com/EversonDias/potencia-tech-powered-by-iFood-ciencias-de-dados-com-python/tree/desafio-2) 
+## db.sql
 
+Contei o código para popular as tabelas com dados falsos para treinamento.
 
-```bash
-  git clone -b desafio-2 https://github.com/EversonDias/potencia-tech-powered-by-iFood-ciencias-de-dados-com-python.git desafio-2
-```
+## query
 
-```bash
-  cd desafio-2
-```
-
-```bash
-  python3 main.py
-```
-
-obs: É necessário ter instalado python3
-
-</details>
-
-# Clone o repositorio
-
-```bash
-  git clone https://github.com/EversonDias/potencia-tech-powered-by-iFood-ciencias-de-dados-com-python.git ciencias-de-dados
-```
-
-```bash
-  cd ciencias-de-dados
-```
-
-```bash
-  git chekout <nome da branch do desafil>
-```
+Nessa pasta tem algumas query que podemos usar nesse banco de dados.
