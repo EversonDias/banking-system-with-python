@@ -8,6 +8,8 @@ CREATE TABLE client (
   last_name VARCHAR(20) NOT NULL,
   middle_name VARCHAR(20) NOT NULL,
   CPF CHAR(14) NOT NULL,
+  phone_number CHAR(15) NOT NULL,
+  email VARCHAR(50) NOT NULL,
   birth_date DATE NOT NULL,
   street VARCHAR(30) NOT NULL,
   neighborhood VARCHAR(30) NOT NULL,
@@ -38,7 +40,7 @@ CREATE TABLE product (
 
 CREATE TABLE orders (
 	id INT PRIMARY KEY AUTO_INCREMENT,
-  status ENUM('PROCESSING', 'IN TRANSPORT', 'FINISH'),
+  status ENUM('EM PROCESSO', 'EM TRANSPORTE', 'FINALIZADO'),
   client_id INT NOT NULL,
   description VARCHAR(200) NOT NULL,
   freight DECIMAL(5,2) DEFAULT(10.00),
@@ -48,7 +50,7 @@ CREATE TABLE orders (
 CREATE TABLE payment (
   orders_id INT PRIMARY KEY,
   type_payment ENUM('BOLETO', 'CREDITO', 'DEBITO', 'PIX') DEFAULT ('CREDITO'),
-  status ENUM('FAILURE', 'SUCCESS', 'IN PROGRESS') DEFAULT('IN PROGRESS'),
+  status ENUM('FALHA', 'SUCESSO', 'EM PROGRESSO') DEFAULT('EM PROGRESSO'),
   CONSTRAINT payment_fk_orders FOREIGN KEY (orders_id) REFERENCES orders (id)
 );
 
@@ -98,7 +100,7 @@ CREATE TABLE product_provided (
 CREATE TABLE seller (
   id INT PRIMARY KEY AUTO_INCREMENT,
   corporate_name VARCHAR(30) NOT NULL,
-  email VARCHAR(20) NOT NULL,
+  email VARCHAR(50) NOT NULL,
   phone_number CHAR(15) NOT NULL,
   fantasy_name VARCHAR(20) NOT NULL,
   CNPJ CHAR(18) NOT NULL,
@@ -116,11 +118,12 @@ CREATE TABLE bank_account (
   CONSTRAINT bank_account_fk_seller_id FOREIGN KEY (seller_id) REFERENCES seller (id)
 );
 
-CREATE TABLE product_sold (
+CREATE TABLE sales_history (
   seller_id INT,
   product_id INT,
   quantity INT UNSIGNED NOT NULL,
+  sale_date DATETIME DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (seller_id, product_id),
-  CONSTRAINT product_sold_fk_seller_id FOREIGN KEY (seller_id) REFERENCES seller (id),
-  CONSTRAINT product_sold_fk_product_id FOREIGN KEY (product_id) REFERENCES product (id)
+  CONSTRAINT sales_history_fk_seller_id FOREIGN KEY (seller_id) REFERENCES seller (id),
+  CONSTRAINT sales_history_fk_product_id FOREIGN KEY (product_id) REFERENCES product (id)
 );
