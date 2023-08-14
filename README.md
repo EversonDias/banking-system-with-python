@@ -3,8 +3,8 @@
 ![logo do curso](https://hermes.dio.me/tracks/49c408ad-800d-416d-b77c-681add1be673.png)
 
 # índice
-- [sobre](#sobre)
-- [Criação do banco de dados](#criação-do-banco-de-dados)
+- [Sobre](#sobre)
+- [Como executar](#criação-do-banco-de-dados)
 - [Query](#query)
 
 # Sobre
@@ -50,6 +50,8 @@ cd desafio_ecommerce
 
 ⚠️ O comando docker-compose up -d cria o contêiner cria o banco de dados cria as tabeles e incluir os dados. ⚠️
 
+⚠️ importante ter instalado docker desktop ou docker-comose ⚠️
+
 ```bash
 docker-compose up -d
 ```
@@ -61,7 +63,7 @@ docker exec -it db_manager bash
 ```
 
 ```bash
-mysql ecommerce
+mysql ecommerce -ppassword
 ```
 
 # Query
@@ -71,16 +73,7 @@ mysql ecommerce
 
 
 ```sql
-SELECT 
-	CONCAT(first_name,' ',middle_name,' ',last_name) AS nome_completo,
-  phone_number AS numero_de_telefone,
-  email,
-  CONCAT(street,'-',neighborhood,'-',state,'-',city,'-') AS endereço,
-  birth_date AS data_de_nascimento
-FROM 
-	client AS c, wallet AS w 
-WHERE 
-  c.id = w.client_id AND w.type_card = 'CREDITO';
+SELECT CONCAT(first_name,' ',middle_name,' ',last_name) AS nome_completo, phone_number AS numero_de_telefone, email, CONCAT(street,'-',neighborhood,'-',state,'-',city,'-') AS endereço, birth_date AS data_de_nascimento FROM client AS c, wallet AS w WHERE c.id = w.client_id AND w.type_card = 'CREDITO';
 ```
 
 </details>
@@ -90,18 +83,7 @@ WHERE
 
 
 ```sql
-SELECT 
-	CONCAT(first_name,' ',middle_name,' ',last_name) AS nome_completo,
-  phone_number AS numero_de_telefone,
-  email,
-  CONCAT(street,'-',neighborhood,'-',state,'-',city,'-') AS endereço,
-  birth_date AS data_de_nascimento
-FROM 
-	client AS c,
-  orders AS o,
-  payment AS p
-WHERE 
-  c.id = o.client_id AND o.id = p.orders_id AND p.status = 'EM PROGRESSO';
+SELECT CONCAT(first_name,' ',middle_name,' ',last_name) AS nome_completo, phone_number AS numero_de_telefone, email, CONCAT(street,'-',neighborhood,'-',state,'-',city,'-') AS endereço, birth_date AS data_de_nascimento FROM client AS c, orders AS o, payment AS p WHERE c.id = o.client_id AND o.id = p.orders_id AND p.status = 'EM PROGRESSO';
 ```
 
 </details>
@@ -111,20 +93,7 @@ WHERE
 
 
 ```sql
-SELECT 
-	fantasy_name AS nome,
-  phone_number AS numero_de_telefone,
-  email,
-  (
-		SELECT
-			SUM(quantity)
-		FROM
-			sales_history
-		WHERE
-			sales_history.seller_id = id
-	) AS quantidade_de_vendas
-FROM 
-	seller AS s HAVING quantidade_de_vendas > 10;
+SELECT fantasy_name AS nome, phone_number AS numero_de_telefone, email, ( SELECT SUM(quantity) FROM sales_history WHERE sales_history.seller_id = id ) AS quantidade_de_vendas FROM seller AS s HAVING quantidade_de_vendas > 10;
 ```
 
 </details>
@@ -134,22 +103,7 @@ FROM
 
 
 ```sql
-SELECT 
-	name AS nome_do_produto,
-  category AS categoria,
-  description AS descrição,
-  assessment AS nota,
-  price AS preço,
-  (
-		SELECT
-			SUM(quantity)
-		FROM
-			sales_history
-		WHERE
-			sales_history.product_id = id
-	) AS quantidade_de_vendas
-FROM 
-	product ORDER BY quantidade_de_vendas DESC LIMIT 5;
+SELECT name AS nome_do_produto,category AS categoria,description AS descrição,assessment AS nota, price AS preço,(SELECT SUM(quantity) FROM sales_history WHERE sales_history.product_id = id) AS quantidade_de_vendas FROM product ORDER BY quantidade_de_vendas DESC LIMIT 5;
 ```
 
 </details>
@@ -159,22 +113,7 @@ FROM
 
 
 ```sql
-SELECT 
-	name AS nome_do_produto,
-  category AS categoria,
-  description AS descrição,
-  assessment AS nota,
-  price AS preço,
-  (
-		SELECT
-			SUM(quantity)
-		FROM
-			sales_history
-		WHERE
-			sales_history.product_id = id
-	) AS quantidade_de_vendas
-FROM 
-	product HAVING quantidade_de_vendas < 10;
+SELECT name AS nome_do_produto, category AS categoria, description AS descrição, assessment AS nota, price AS preço, ( SELECT SUM(quantity) FROM sales_history WHERE sales_history.product_id = id ) AS quantidade_de_vendas FROM product HAVING quantidade_de_vendas < 10;
 ```
 
 </details>
@@ -184,17 +123,7 @@ FROM
 
 
 ```sql
-SELECT 
-	fantasy_name AS nome,
-  phone_number AS numero_de_telefone,
-  email,
-  SUM((ps.quantity * p.price)) AS faturamento
-FROM 
-	seller AS s,
-  sales_history AS ps,
-  product AS p
-WHERE s.id = ps.seller_id AND ps.product_id = p.id AND ps.sale_date LIKE '2023-08-%'
-GROUP BY s.id;
+SELECT fantasy_name AS nome, phone_number AS numero_de_telefone, email, SUM((ps.quantity * p.price)) AS faturamento FROM seller AS s,sales_history AS ps, product AS p WHERE s.id = ps.seller_id AND ps.product_id = p.id AND ps.sale_date LIKE '2023-08-%' GROUP BY s.id;
 ```
 
 </details>
@@ -204,21 +133,7 @@ GROUP BY s.id;
 
 
 ```sql
-SELECT 
-	fantasy_name AS nome,
-  phone_number AS numero_de_telefone,
-  email,
-  ps.sale_date AS data_da_venda,
-  ps.quantity AS quantidade_vendida,
-  p.price AS preço_do_produto,
-  p.name AS nome_do_produto,
-  p.category AS categoria_do_produto,
-  (ps.quantity * p.price) AS valor_total
-FROM 
-	seller AS s,
-  sales_history AS ps,
-  product AS p
-WHERE s.id = ps.seller_id AND ps.product_id = p.id;
+SELECT fantasy_name AS nome, phone_number AS numero_de_telefone, email, ps.sale_date AS data_da_venda, ps.quantity AS quantidade_vendida, p.price AS preço_do_produto, p.name AS nome_do_produto, p.category AS categoria_do_produto, (ps.quantity * p.price) AS valor_total FROM seller AS s, sales_history AS ps, product AS p WHERE s.id = ps.seller_id AND ps.product_id = p.id;
 ```
 
 </details>
@@ -228,18 +143,7 @@ WHERE s.id = ps.seller_id AND ps.product_id = p.id;
 
 
 ```sql
-SELECT 
-	p.name AS nome,
-  pp.quantity AS quantidade,
-  pp.date_provide AS data_da_compra,
-  s.corporate_name AS nome_social,
-  s.phone_number AS telefone
-FROM 
-	product AS p,
-  product_provided AS  pp,
-  supplier AS s
-WHERE
-	p.id = pp.product_id AND pp.supplier_id = s.id AND pp.date_provide LIKE '2023-08-%';
+SELECT p.name AS nome, pp.quantity AS quantidade, pp.date_provide AS data_da_compra, s.corporate_name AS nome_social, s.phone_number AS telefone FROM product AS p, product_provided AS  pp, supplier AS s WHERE p.id = pp.product_id AND pp.supplier_id = s.id AND pp.date_provide LIKE '2023-08-%';
 ```
 
 </details>
