@@ -63,10 +63,16 @@ docker exec -it db_manager bash
 ```
 
 ```bash
-mysql ecommerce -ppassword
+mysql -ppassword
 ```
 
 # Query
+
+Selecione o banco de dados
+
+```sql
+USE ecommerce;
+```
 
 <details>
 <summary><strong>todos os clientes que tem cartão de credito</strong></summary>
